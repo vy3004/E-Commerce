@@ -19,6 +19,11 @@ export function MainNav({
       active: patchname === `/${params.storeId}`,
     },
     {
+      href: `/${params.storeId}/billboards`,
+      label: "Billboards",
+      active: patchname === `/${params.storeId}/billboards`,
+    },
+    {
       href: `/${params.storeId}/settings`,
       label: "Settings",
       active: patchname === `/${params.storeId}/settings`,
