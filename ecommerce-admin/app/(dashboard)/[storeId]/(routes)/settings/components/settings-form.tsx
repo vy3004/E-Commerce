@@ -4,7 +4,7 @@ import * as z from "zod";
 import axios from "axios";
 import { useState } from "react";
 import { Store } from "@prisma/client";
-import { Trash } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-hot-toast";
@@ -93,7 +93,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
           size="sm"
           onClick={() => setOpen(true)}
         >
-          <Trash className="h-4 w-4" />
+          <Trash2 className="h-4 w-4" />
         </Button>
       </div>
       <Separator />
