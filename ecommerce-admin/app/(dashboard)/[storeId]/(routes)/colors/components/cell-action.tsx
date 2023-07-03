@@ -16,10 +16,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { AlertModal } from "@/components/modals/alert-modal";
 
-import { BillboardColumn } from "./columns";
+import { ColorColumn } from "./columns";
 
 interface CellActionProps {
-  data: BillboardColumn;
+  data: ColorColumn;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -31,22 +31,22 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   const onCopy = () => {
     navigator.clipboard.writeText(data.id);
-    toast.success("Billboard Id copied to the clipboard!");
+    toast.success("Color Id copied to the clipboard!");
   };
 
   const onUpdate = () => {
-    router.push(`/${params.storeId}/billboards/${data.id}`);
+    router.push(`/${params.storeId}/colors/${data.id}`);
   };
 
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
+      await axios.delete(`/api/${params.storeId}/colors/${data.id}`);
       router.refresh();
-      toast.success("Billboard deleted!");
+      toast.success("Color deleted!");
     } catch (error) {
       toast.error(
-        "Make sure you delete all categories that are using this billboard first!"
+        "Make sure you delete all products that are using this color first!"
       );
     } finally {
       setLoading(false);
