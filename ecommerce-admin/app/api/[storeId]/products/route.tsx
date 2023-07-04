@@ -14,14 +14,37 @@ export async function POST(
     }
 
     const body = await req.json();
-    const { label, imageUrl } = body;
+    const {
+      name,
+      price,
+      categoryId,
+      sizeId,
+      colorId,
+      images,
+      isFeatured,
+      isArchived,
+    } = body;
 
-    if (!label) {
-      return new Response("Label is required", { status: 400 });
+    if (!name) {
+      return new Response("Name is required", { status: 400 });
     }
 
-    if (!imageUrl) {
-      return new Response("Image URL is required", { status: 400 });
+    if (!price) {
+      return new Response("Price is required", { status: 400 });
+    }
+    if (!categoryId) {
+      return new Response("Category id is required", { status: 400 });
+    }
+
+    if (!sizeId) {
+      return new Response("Size id is required", { status: 400 });
+    }
+    if (!colorId) {
+      return new Response("Color id is required", { status: 400 });
+    }
+
+    if (!images || !images.length) {
+      return new Response("Images are required", { status: 400 });
     }
 
     if (!params.storeId) {
@@ -39,17 +62,27 @@ export async function POST(
       return new Response("Unauthorized", { status: 403 });
     }
 
-    const billboard = await prismadb.billboard.create({
+    const product = await prismadb.product.create({
       data: {
-        label,
-        imageUrl,
+        name,
+        price,
+        images: {
+          createMany: {
+            data: [...images.map((image: { url: string }) => image)],
+          },
+        },
+        categoryId,
+        sizeId,
+        colorId,
+        isFeatured,
+        isArchived,
         storeId: params.storeId,
       },
     });
 
-    return NextResponse.json(billboard);
+    return NextResponse.json(product);
   } catch (error) {
-    console.log("BILLBOARD_POST", error);
+    console.log("PRODUCT_POST", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }
@@ -59,19 +92,39 @@ export async function GET(
   { params }: { params: { storeId: string } }
 ) {
   try {
+    const { searchParams } = new URL(req.url);
+    const categoryId = searchParams.get("categoryId") || undefined;
+    const sizeId = searchParams.get("sizeId") || undefined;
+    const colorId = searchParams.get("colorId") || undefined;
+    const isFeatured = searchParams.get("isFeatured") || undefined;
+
     if (!params.storeId) {
       return new Response("Store id is required", { status: 400 });
     }
 
-    const billboards = await prismadb.billboard.findMany({
+    const products = await prismadb.product.findMany({
       where: {
         storeId: params.storeId,
+        categoryId,
+        sizeId,
+        colorId,
+        isFeatured: isFeatured ? true : undefined,
+        isArchived: false,
+      },
+      include: {
+        images: true,
+        category: true,
+        size: true,
+        color: true,
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
 
-    return NextResponse.json(billboards);
+    return NextResponse.json(products);
   } catch (error) {
-    console.log("BILLBOARDS_GET", error);
+    console.log("PRODUCTS_GET", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }
