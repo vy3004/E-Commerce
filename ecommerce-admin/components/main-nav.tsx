@@ -9,44 +9,49 @@ export function MainNav({
   className,
   ...props
 }: React.HTMLAttributes<HTMLElement>) {
-  const patchname = usePathname();
+  const pathname = usePathname();
   const params = useParams();
 
   const routes = [
     {
       href: `/${params.storeId}`,
       label: "Overview",
-      active: patchname === `/${params.storeId}`,
+      active: pathname === `/${params.storeId}`,
     },
     {
       href: `/${params.storeId}/billboards`,
       label: "Billboards",
-      active: patchname === `/${params.storeId}/billboards`,
+      active: pathname === `/${params.storeId}/billboards`,
     },
     {
       href: `/${params.storeId}/categories`,
       label: "Categories",
-      active: patchname === `/${params.storeId}/categories`,
+      active: pathname === `/${params.storeId}/categories`,
     },
     {
       href: `/${params.storeId}/sizes`,
       label: "Sizes",
-      active: patchname === `/${params.storeId}/sizes`,
+      active: pathname === `/${params.storeId}/sizes`,
     },
     {
       href: `/${params.storeId}/colors`,
       label: "Colors",
-      active: patchname === `/${params.storeId}/colors`,
+      active: pathname === `/${params.storeId}/colors`,
     },
     {
       href: `/${params.storeId}/products`,
       label: "Products",
-      active: patchname === `/${params.storeId}/products`,
+      active: pathname === `/${params.storeId}/products`,
+    },
+    {
+      href: `/${params.storeId}/orders`,
+      label: "Orders",
+      active: pathname === `/${params.storeId}/orders`,
     },
     {
       href: `/${params.storeId}/settings`,
       label: "Settings",
-      active: patchname === `/${params.storeId}/settings`,
+      active: pathname === `/${params.storeId}/settings`,
     },
   ];
 
