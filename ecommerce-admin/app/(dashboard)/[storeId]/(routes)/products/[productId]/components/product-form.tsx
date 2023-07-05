@@ -47,6 +47,7 @@ interface ProductFormProps {
 
 const formSchema = z.object({
   name: z.string().min(1),
+  mainImage: z.string().min(1),
   images: z.object({ url: z.string() }).array(),
   price: z.coerce.number().min(1),
   categoryId: z.string().min(1),
@@ -84,6 +85,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         }
       : {
           name: "",
+          mainImage: "",
           images: [],
           price: 0,
           categoryId: "",
@@ -162,10 +164,28 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         >
           <FormField
             control={form.control}
+            name="mainImage"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Main Image</FormLabel>
+                <FormControl>
+                  <ImageUpload
+                    value={field.value ? [field.value] : []}
+                    disabled={loading}
+                    onChange={(url) => field.onChange(url)}
+                    onRemove={() => field.onChange("")}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="images"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Images</FormLabel>
+                <FormLabel>Extra Images</FormLabel>
                 <FormControl>
                   <ImageUpload
                     value={field.value.map((image) => image.url)}

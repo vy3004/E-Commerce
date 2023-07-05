@@ -97,13 +97,14 @@ model Product {
   categoryId String
   category   Category    @relation("CategoryToProduct", fields: [categoryId], references: [id])
   name       String
-  price      Decimal
+  price      Float
   isFeatured Boolean     @default(false)
   isArchived Boolean     @default(false)
   sizeId     String
   size       Size        @relation(fields: [sizeId], references: [id])
   colorId    String
   color      Color       @relation(fields: [colorId], references: [id])
+  mainImage  String
   images     Image[]
   orderItems OrderItem[]
   createdAt  DateTime    @default(now())

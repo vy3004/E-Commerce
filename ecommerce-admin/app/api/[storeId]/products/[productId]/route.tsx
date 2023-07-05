@@ -45,6 +45,7 @@ export async function PATCH(
       categoryId,
       sizeId,
       colorId,
+      mainImage,
       images,
       isFeatured,
       isArchived,
@@ -68,8 +69,13 @@ export async function PATCH(
     if (!sizeId) {
       return new Response("Size id is required", { status: 400 });
     }
+
     if (!colorId) {
       return new Response("Color id is required", { status: 400 });
+    }
+
+    if (!mainImage) {
+      return new Response("Main image URL is required", { status: 400 });
     }
 
     if (!images || !images.length) {
@@ -91,24 +97,35 @@ export async function PATCH(
       return new Response("Unauthorized", { status: 403 });
     }
 
-    const product = await prismadb.product.update({
+    await prismadb.product.update({
       where: {
         id: params.productId,
       },
       data: {
         name,
         price,
+        categoryId,
+        colorId,
+        sizeId,
+        mainImage,
+        images: {
+          deleteMany: {},
+        },
+        isFeatured,
+        isArchived,
+      },
+    });
+
+    const product = await prismadb.product.update({
+      where: {
+        id: params.productId,
+      },
+      data: {
         images: {
           createMany: {
             data: [...images.map((image: { url: string }) => image)],
           },
         },
-        categoryId,
-        sizeId,
-        colorId,
-        isFeatured,
-        isArchived,
-        storeId: params.storeId,
       },
     });
 

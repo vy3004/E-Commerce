@@ -20,6 +20,7 @@ export async function POST(
       categoryId,
       sizeId,
       colorId,
+      mainImage,
       images,
       isFeatured,
       isArchived,
@@ -39,8 +40,13 @@ export async function POST(
     if (!sizeId) {
       return new Response("Size id is required", { status: 400 });
     }
+
     if (!colorId) {
       return new Response("Color id is required", { status: 400 });
+    }
+
+    if (!mainImage) {
+      return new Response("Main image URL is required", { status: 400 });
     }
 
     if (!images || !images.length) {
@@ -66,17 +72,18 @@ export async function POST(
       data: {
         name,
         price,
+        categoryId,
+        colorId,
+        sizeId,
+        mainImage,
+        isFeatured,
+        isArchived,
+        storeId: params.storeId,
         images: {
           createMany: {
             data: [...images.map((image: { url: string }) => image)],
           },
         },
-        categoryId,
-        sizeId,
-        colorId,
-        isFeatured,
-        isArchived,
-        storeId: params.storeId,
       },
     });
 

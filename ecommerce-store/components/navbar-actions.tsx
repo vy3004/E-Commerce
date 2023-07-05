@@ -18,7 +18,7 @@ const NavbarActions = () => {
     <div className="flex items-center ml-auto gap-x-4">
       <Button className="relative flex items-center rounded-full bg-black px-4 py-2 hover:scale-105 transition">
         <ShoppingCart size={20} />
-        <div className="absolute min-w-[20px] rounded-full bg-red-500 top-0 right-[-5px] text-white text-[12px] flex justify-center items-center px-[6px]">
+        <div className="absolute h-[20px] min-w-[20px] rounded-full bg-red-500 top-[-2px] right-[-5px] text-white text-[12px] flex justify-center items-center px-[6px] transition">
           3
         </div>
       </Button>
