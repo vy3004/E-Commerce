@@ -24,10 +24,36 @@ export const columns: ColumnDef<ProductColumn>[] = [
   {
     accessorKey: "isArchived",
     header: "Archived",
+    cell: ({ row }) => (
+      <div className="flex items-center">
+        {row.original.isArchived ? (
+          <div className="bg-green-500 rounded-full px-2 py-1 text-white">
+            On
+          </div>
+        ) : (
+          <div className="bg-red-500 rounded-full px-2 py-1 text-white">
+            Off
+          </div>
+        )}
+      </div>
+    ),
   },
   {
     accessorKey: "isFeatured",
     header: "Featured",
+    cell: ({ row }) => (
+      <div className="flex items-center">
+        {row.original.isFeatured ? (
+          <div className="bg-green-500 rounded-full px-2 py-1 text-white">
+            On
+          </div>
+        ) : (
+          <div className="bg-red-500 rounded-full px-2 py-1 text-white">
+            Off
+          </div>
+        )}
+      </div>
+    ),
   },
   {
     accessorKey: "price",
