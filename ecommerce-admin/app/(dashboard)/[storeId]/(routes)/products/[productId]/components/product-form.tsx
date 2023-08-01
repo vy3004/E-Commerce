@@ -142,7 +142,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         onConfirm={onDelete}
         loading={loading}
       />
-      {initialData && (
+      {initialData ? (
         <div className="flex items-center justify-between">
           <Heading title={title} description={description} />
           <Button
@@ -154,6 +154,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             <Trash2 className="h-4 w-4" />
           </Button>
         </div>
+      ) : (
+        <Heading title={title} description={description} />
       )}
 
       <Separator />

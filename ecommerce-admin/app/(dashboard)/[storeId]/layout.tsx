@@ -26,10 +26,6 @@ export default async function DashboardLayout({
   if (!store) redirect("/");
 
   return (
-    // <>
-    //   <Navbar />
-    //   {children}
-    // </>
     <div className="h-full relative">
       <div className="hidden h-full xl:w-72 xl:flex xl:flex-col xl:fixed xl:inset-y-0 z-[80]">
         <Sidebar />
