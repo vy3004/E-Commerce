@@ -21,18 +21,21 @@ export const ProductClient: React.FC<ProductClientProps> = ({ data }) => {
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="md:flex md:items-center md:justify-between">
         <Heading
           title={`Products (${data.length})`}
           description="Manage products for your store"
         />
-        <Button onClick={() => router.push(`/${params.storeId}/products/new`)}>
+        <Button
+          className="md:mt-0 mt-4"
+          onClick={() => router.push(`/${params.storeId}/products/new`)}
+        >
           <Plus className="h-4 w-4 mr-2" />
           Add new
         </Button>
       </div>
       <Separator />
-      <DataTable columns={columns} data={data} searchKey="name" />
+      <DataTable columns={columns} data={data} />
 
       <Heading title="API" description="API calls for products" />
       <Separator />

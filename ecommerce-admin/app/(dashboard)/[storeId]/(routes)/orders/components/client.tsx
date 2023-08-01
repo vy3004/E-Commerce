@@ -13,14 +13,12 @@ interface OrderClientProps {
 export const OrderClient: React.FC<OrderClientProps> = ({ data }) => {
   return (
     <>
-      <div className="flex items-center justify-between">
-        <Heading
-          title={`Orders (${data.length})`}
-          description="Manage orders for your store"
-        />
-      </div>
+      <Heading
+        title={`Orders (${data.length})`}
+        description="Manage orders for your store"
+      />
       <Separator />
-      <DataTable columns={columns} data={data} searchKey="phone" />
+      <DataTable columns={columns} data={data} />
     </>
   );
 };
