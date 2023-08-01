@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 
 import { ModalProvider } from "@/providers/modal-provider";
 import { ToasterProvider } from "@/providers/toast-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 import "./globals.css";
 
@@ -20,11 +21,13 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
-          <ToasterProvider />
-          <ModalProvider />
-          {children}
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+            <ToasterProvider />
+            <ModalProvider />
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
