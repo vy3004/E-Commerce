@@ -6,14 +6,19 @@ import Currency from "./ui/currency";
 import Button from "./ui/button";
 
 import { Product } from "@/types";
+import { MouseEventHandler } from "react";
+import useCart from "@/hooks/use-cart";
 
 interface ProductInfoProps {
   data: Product;
 }
 
 const ProductInfo: React.FC<ProductInfoProps> = ({ data }) => {
-  const onAddToCart = () => {
-    // cart.addItem(data);
+  const cart = useCart();
+
+  const handleAddToCart: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
+    cart.addItem(data);
   };
 
   return (
@@ -41,7 +46,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ data }) => {
         </div>
       </div>
       <div className="mt-10 flex items-center gap-x-3">
-        <Button onClick={() => {}} className="flex items-center gap-x-2">
+        <Button onClick={handleAddToCart} className="flex items-center gap-x-2">
           Add To Cart
           <ShoppingCart size={20} />
         </Button>
