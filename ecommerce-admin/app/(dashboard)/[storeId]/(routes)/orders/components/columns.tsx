@@ -3,6 +3,8 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { CheckCircle2, XCircle } from "lucide-react";
 
+import { CellAction } from "./cell-action";
+
 export type OrderColumn = {
   id: string;
   name: string;
@@ -14,6 +16,13 @@ export type OrderColumn = {
   totalPrice: string;
   createdAt: string;
 };
+
+const statuses = [
+  { name: "Pending", color: "text-yellow-500 bg-yellow-100" },
+  { name: "Delivery", color: "text-blue-500 bg-blue-100" },
+  { name: "Completed", color: "text-green-500 bg-green-100" },
+  { name: "Canceled", color: "text-red-500 bg-red-100" },
+];
 
 export const columns: ColumnDef<OrderColumn>[] = [
   {
@@ -27,6 +36,9 @@ export const columns: ColumnDef<OrderColumn>[] = [
   {
     accessorKey: "address",
     header: "Address",
+    cell: ({ row }) => (
+      <div className="w-40 truncate">{row.original.address}</div>
+    ),
   },
   {
     accessorKey: "createdAt",
@@ -37,7 +49,11 @@ export const columns: ColumnDef<OrderColumn>[] = [
     header: "Status",
     cell: ({ row }) => (
       <div className="flex">
-        <div className="text-yellow-500 bg-yellow-100 rounded-lg px-2 py-1">
+        <div
+          className={`"font-semibold rounded-lg px-2 py-1" ${
+            statuses.find(({ name }) => name === row.original.status)?.color
+          }`}
+        >
           {row.original.status}
         </div>
       </div>
@@ -63,5 +79,9 @@ export const columns: ColumnDef<OrderColumn>[] = [
         )}
       </div>
     ),
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => <CellAction data={row.original} />,
   },
 ];

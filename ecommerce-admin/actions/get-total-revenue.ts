@@ -5,6 +5,7 @@ export const getTotalRevenue = async (storeId: string) => {
     where: {
       storeId,
       isPaid: true,
+      status: "completed",
     },
     include: {
       orderItems: true,

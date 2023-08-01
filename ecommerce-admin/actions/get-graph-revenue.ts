@@ -12,6 +12,7 @@ export const getGraphRevenue = async (
     where: {
       storeId,
       isPaid: true,
+      status: "completed",
     },
     include: {
       orderItems: true,

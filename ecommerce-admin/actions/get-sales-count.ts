@@ -5,6 +5,7 @@ export const getSalesCount = async (storeId: string) => {
     where: {
       storeId,
       isPaid: true,
+      status: "completed",
     },
   });
 

@@ -58,8 +58,6 @@ const CartItem: React.FC<CartItemProps> = ({ data, quantity }) => {
             <Currency value={data.price} />
           </div>
 
-          <div></div>
-
           <div className="space-x-2">
             <button
               onClick={lessOfThisProduct}
