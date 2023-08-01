@@ -2,10 +2,12 @@
 
 import { ShoppingCart } from "lucide-react";
 
-import Button from "./ui/button";
 import { useEffect, useState } from "react";
 import useCart from "@/hooks/use-cart";
 import { useRouter } from "next/navigation";
+
+import Button from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const NavbarActions = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -20,6 +22,7 @@ const NavbarActions = () => {
 
   return (
     <div className="flex items-center ml-auto gap-x-4">
+      <Input type="search" placeholder="Search..." />
       <Button
         onClick={() => router.push("/cart")}
         className="relative flex items-center rounded-full bg-black px-4 py-2 hover:scale-105 transition"

@@ -87,7 +87,7 @@ const Sidebar = () => {
                 "text-sm group flex p-3 w-full justify-start font-bold cursor-pointer hover:text-black hover:bg-black/10 dark:hover:text-white dark:hover:bg-white/10 rounded-lg transition",
                 pathname === route.href
                   ? "text-black bg-black/10 dark:text-white dark:bg-white/10"
-                  : "text-gray-600"
+                  : "text-gray-400"
               )}
             >
               <div className="flex items-center flex-1">

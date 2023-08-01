@@ -47,6 +47,8 @@ export async function PATCH(
       colorId,
       mainImage,
       images,
+      countInStock,
+      description,
       isFeatured,
       isArchived,
     } = body;
@@ -111,6 +113,8 @@ export async function PATCH(
         images: {
           deleteMany: {},
         },
+        countInStock,
+        description,
         isFeatured,
         isArchived,
       },
